@@ -1,10 +1,10 @@
-<form v-on:submit.prevent="guardarMateria" data-accion="nuevo" data-idmateria='' id="frm-materia" method="POST">
-    <div class="card text-white bg-secondary mb-3" style="max-width: 24rem;">
+<form v-on:submit.prevent="guardarPelicula" data-accion="nuevo" data-id_pelicula='' id="frmPelicula" method="POST">
+    <div class="card text-white bg-dark mb-3" style="max-width: 24rem;">
 
         <div class="card-header">
-            MANTENIMIENTO DE MATERIAS
+            LISTADO DE PELICULAS
 
-            <button type="button" id="btn-close-materias" class="close" aria-label="Close">
+            <button type="button" id="btn-close-pelicula" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -13,20 +13,22 @@
             <div class="row row-cols-1 p-2">
                 <div class="row-col">
                     <div class="col">
-                        CODIGO:
+                        NOMBRE DE LA PELICULA
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="materia.codigo" placeholder="XXXX0000" class="form-control">
+                        <input type="text" required v-model="pelicula.nombre" placeholder=" Ej: Avatar"
+                            class="form-control">
                     </div>
                 </div>
             </div>
             <div class="row row-cols-1 p-2">
                 <div class="row-col">
                     <div class="col">
-                        NOMBRE:
+                        SINOPSIS
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="materia.nombre" placeholder="AAAAAAA" class="form-control">
+                        <input type="text" required v-model="pelicula.sinopsis" placeholder="Sinopsis de la pelicula"
+                            class="form-control">
                     </div>
                 </div>
             </div>
@@ -34,10 +36,10 @@
             <div class="row row-cols-1 p-2">
                 <div class="row-col">
                     <div class="col">
-                        CARRERA:
+                        GENERO
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="materia.carrera" placeholder="aaaaaaa....."
+                        <input type="text" required v-model="pelicula.genero" placeholder="Aventura, Accion, Comedia"
                             class="form-control">
                     </div>
                 </div>
@@ -46,10 +48,10 @@
             <div class="row row-cols-1">
                 <div class="row-col">
                     <div class="col">
-                        CICLO:
+                        DURACION:
                     </div>
                     <div class="col">
-                        <input type="text" required v-model="materia.ciclo" placeholder="IV"
+                        <input type="text" required v-model="pelicula.duracion" placeholder="Ej: 2:00:00"
                             class="form-control">
                     </div>
                 </div>
@@ -58,11 +60,11 @@
             <div class="rows row-cols-1 p-2">
                 <div class="row-col text-center">
                     <div class="col">
-                        <input type="submit" id="btnGuardarMateria" class="btn btn-outline-primary text-white"
+                        <input type="submit" id="btnGuardarPelicula" class="btn btn-outline-primary text-white"
                             value="GUARDAR">
                         <input type="reset" id="" class="btn btn-outline-warning text-white" value="LIMPIAR">
-                        <input type="button" class="btn btn-outline-success mostrar-buscar-materias text-white"
-                            data-modulo="materias" data-form="buscar-materias" value="Buscar">
+                        <input type="button" class="btn btn-outline-success mostrar-buscar-pelicula text-white"
+                            data-modulo="pelicula" data-form="buscar-pelicula" value="BUSCAR">
                     </div>
                 </div>
             </div>
@@ -70,11 +72,11 @@
             <div class="row row-cols-1 p-2">
                 <div class="row-col text-center">
                     <div class="alert alert-success" role="alert">
-                        {{ materia.msg }}
+                        {{ pelicula.msg }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </form>
-<script src="public/vistas/materias/materias.js"></script>
+<script src="public/vistas/pelicula/pelicula.js"></script>
