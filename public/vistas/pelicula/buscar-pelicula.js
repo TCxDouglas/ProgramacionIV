@@ -1,39 +1,41 @@
-var appBuscarMateria = new Vue({
-    el: '#frm-buscar-materias',
+var appBuscarPelicula = new Vue({
+    el: '#frm-buscar-pelicula',
     data: {
-        mismaterias: [],
+        mispeliculas: [],
         valor: ''
     },
     methods: {
-        buscarMateria: function () {
-            fetch(`private/modulos/materias/procesos.php?proceso=buscarMateria&materia=${this.valor}`).then(resp => resp.json()).then(resp => {
-                this.mismaterias = resp;
+        buscarPelicula: function () {
+            fetch(`private/modulos/peliculas/procesos.php?proceso=buscarPelicula&peliculas=${this.valor}`).then(resp => resp.json()).then(resp => {
+                console.log(resp);
+                this.mispeliculas = resp;
             });
         },
-        modificarMateria: function (materia) {
-            appmateria.materia = materia;
-            appmateria.materia.accion = 'modificar';
+        modificarPelicula: function (pelicula) {
+            apppelicula.pelicula = pelicula;
+            apppelicula.pelicula.accion = 'modificar';
         },
-        eliminarMateria: function (idMateria) {
-            let dialog = document.getElementById("dialogMaterias");
+        eliminarPelicula: function (id_pelicula) {
+            let dialog = document.getElementById("dialogPelicula");
             dialog.close();
             dialog.showModal();
 
-            $(`#btnCancelarMateria`).click(e => {
-                dialog.close();
-            });
 
-            $(`#btnConfirmarMateria`).click(e => {
-                fetch(`private/modulos/materias/procesos.php?proceso=eliminarMateria&materia=${idMateria}`).then(resp => resp.json()).then(resp => {
-                    //console.log(resp)
-                    this.buscarMateria();
+            $(`#btnCancelarPelicula`).click(e=>{
+                dialog.close();
+            })
+
+            $(`#btnConfirmarPelicula`).click(e=>{
+                fetch(`private/modulos/peliculas/procesos.php?proceso=eliminarPelicula&peliculas=${id_pelicula}`).then(resp => resp.json()).then(resp => {
+                    console.log(resp)
+                    this.buscarPelicula();
                 });
                 dialog.close();
-            });
+            })
             
         }
     },
     created: function () {
-        this.buscarMateria();
+        this.buscarPelicula();
     }
 });
