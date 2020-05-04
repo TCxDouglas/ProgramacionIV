@@ -27,7 +27,7 @@ class peliculas{
 
     private function validar_datos(){
         if(empty($this->datos['nombre'])){
-            $this->respuesta['msg']='Por Favor Ingrese el sinopsis del peliculas';
+            $this->respuesta['msg']='Por Favor Ingrese el nombre del peliculas';
         
         }
         if(empty($this->datos['genero'])){
@@ -45,9 +45,8 @@ class peliculas{
         if($this->respuesta['msg']==='correcto'){
             if($this->datos['accion']==="nuevo"){
                 $this->bd->consultas('
-                INSERT INTO peliculas (nombre,descripcion,sinopsis,genero,duracion) VALUES(
+                INSERT INTO peliculas (nombre,sinopsis,genero,duracion) VALUES(
                     "'. $this->datos['nombre'] .'",
-                    "'. $this->datos['descripcion'] .'",
                     "'. $this->datos['sinopsis'] .'",
                     "'. $this->datos['genero'] .'",
                     "'. $this->datos['duracion'] .'"
@@ -56,9 +55,8 @@ class peliculas{
                 $this->respuesta['msg']='Registro Insertado con Exito';
             }else if($this->datos['accion']==='modificar'){
                 $this->bd->consultas('
-                UPDATE peliculas SET 
+                UPDATE peliculas SET
                 nombre= "'. $this->datos['nombre'].'",
-                descripcion= "'. $this->datos['descripcion'].'",
                 sinopsis= "'. $this->datos['sinopsis'].'",
                 genero= "'.$this->datos['genero'].'",
                 duracion= "'.$this->datos['duracion'].'"
@@ -71,7 +69,7 @@ class peliculas{
 
     public function buscarPelicula($valor=''){
         $this->bd->consultas('
-        SELECT peliculas.idPelicula, peliculas.nombre, peliculas.descripcion, peliculas.sinopsis, peliculas.genero, peliculas.duracion
+        SELECT peliculas.idPelicula, peliculas.nombre, peliculas.sinopsis, peliculas.genero, peliculas.duracion
         FROM peliculas
         WHERE peliculas.nombre LIKE "%'.$valor.'%" OR peliculas.genero LIKE "%'.$valor.'%" OR peliculas.duracion LIKE "%'.$valor.'%"
         ');

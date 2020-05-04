@@ -1,58 +1,56 @@
-<form method="POST" id="frm-buscar-materias">
-    <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
+<form method="POST" id="frm-buscar-pelicula">
+    <div class="card text-white bg-dark mb-3" style="max-width: 70rem;">
         <div class="car-header">
-            BUSQUEDA MATERIAS
+            BUSCAR PELICULAS
 
-            <button type="button" id="btn-close-buscar-materias" class="close" aria-label="Close">
+            <button type="button" id="btn-close-buscar-pelicula" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="card-body">
-            <table id="tbl-buscar-materias" class="table-striped table-dark table-bordered table-hover">
+            <table id="tbl-buscar-pelicula" class="table-striped table-dark table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th colspan="8">
-                            <input type="text" v-model="valor" v-on:keyup="buscarMateria" placeholder="codigo o nombre"
-                                class="form-control">
+                        <th colspan="6">
+                            <input type="text" v-model="valor" v-on:keyup="buscarPelicula" placeholder="Pelicula, Genero o Duracion" class="form-control">
                         </th>
                     </tr>
                     <tr>
-                        <th>CODIGO</th>
                         <th>NOMBRE</th>
-                        <th>CARRERA</th>
-                        <th>CICLO</th>
-                        <th> </th>
+                        <th>SINOPSIS</th>
+                        <th>GENERO</th>
+                        <th>DURACION</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="materia in mismaterias" :key="materia.idMateria"
-                        v-on:click="modificarMateria(materia)">
-                        <td>{{ materia.codigo }}</td>
-                        <td>{{ materia.nombre }}</td>
-                        <td>{{ materia.carrera }}</td>
-                        <td>{{ materia.ciclo }}</td>
+                    <tr v-for="pelicula in mispeliculas" :key="pelicula.id_pelicula">
+                        <td>{{ pelicula.nombre }}</td>
+                        <td>{{ pelicula.sinopsis }}</td>
+                        <td>{{ pelicula.genero }}</td>
+                        <td>{{ pelicula.duracion }}</td>
+
                         <td>
-                            <input v-on:click="eliminarMateria(materia.idMateria)" type="button"
-                                class="btn btn-outline-danger text-white" value="del">
+                            <input v-on:click="eliminarPelicula(pelicula.idPelicula)" type="button" class="btn btn-outline-danger text-white" value="Delete">
+                            <input v-on:click="modificarPelicula(pelicula)" data-dismiss="modal" type="button" class="btn btn-outline-warning text-white" value="Update">
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <dialog class="border-10 rounded bg-dark text-white border-primary" id="dialogMaterias">
-        <p>Esta seguro de eliminar el registro?</p>
+    <dialog class="border-10 rounded bg-dark text-white border-primary text-center" id="dialogPelicula">
+        <p>Esta seguro de eliminar el registro de la Pelicula?</p>
 
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-sm">
-                    <input class="btn btn-primary" type="button" id="btnConfirmarMateria" Value="Aceptar">
+                    <input class="btn btn-primary" type="button" id="btnConfirmarPelicula" Value="Aceptar">
                 </div>
                 <div class="col-sm">
-                    <input class="btn btn-danger" type="button" id="btnCancelarMateria" Value="Cancelar">
+                    <input class="btn btn-danger" type="button" id="btnCancelarPelicula" Value="Cancelar">
                 </div>
             </div>
         </div>
     </dialog>
 </form>
-<script src="public/vistas/materias/buscar-materias.js"></script>
+<script src="public/vistas/pelicula/buscar-pelicula.js"></script>
