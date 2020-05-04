@@ -47,10 +47,22 @@ var appAlquiler = new Vue({
                 this.Alquiler.nombre = '';
                 this.Alquiler.fechaPrestamo = '';
                 this.Alquiler.fechaDevolucion = '';
+                this.Alquiler.valor = '';
                 this.Alquiler.accion = 'nuevo';
                 appBuscarAlquiler.buscarAlquiler();
             });
         },
+
+        limpiarData:function(){
+            
+            this.Alquiler.idalquiler = 0;
+            this.Alquiler.nombreC = '';
+            this.Alquiler.nombre = '';
+            this.Alquiler.fechaPrestamo = '';
+            this.Alquiler.fechaDevolucion = '';
+            this.Alquiler.valor = '';
+            this.Alquiler.accion = 'nuevo';
+        }
 
 
 
