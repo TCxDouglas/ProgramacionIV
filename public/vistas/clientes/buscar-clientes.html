@@ -1,58 +1,61 @@
-<form method="POST" id="frm-buscar-docentes">
+<form method="POST" id="frm-buscar-clientes">
     <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
         <div class="car-header">
-            BUSQUEDA DOCENTES
+            BUSQUEDA CLIENTES
 
-            <button type="button" id="btn-close-buscar-docentes" class="close" aria-label="Close">
+            <button type="button" id="btn-close-buscar-clientes" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="card-body">
-            <table id="tbl-buscar-docentes" class="table-striped table-dark table-bordered table-hover">
+            <table id="tbl-buscar-clientes" class="table-striped table-dark table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th colspan="6">
-                            <input type="text" v-model="valor" v-on:keyup="buscarDocente" placeholder="codigo, nombre o DUI" class="form-control">
+                        <th colspan="8">
+                            <input type="text" v-model="valor" v-on:keyup="buscarCliente" placeholder="codigo o nombre"
+                                class="form-control">
                         </th>
                     </tr>
                     <tr>
-                        <th>CODIGO</th>
                         <th>NOMBRE</th>
                         <th>DIRECCION</th>
-                        <th>DUI</th>
                         <th>TELEFONO</th>
+                        <th>DUI</th>
+                        <th> </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="docente in misdocentes" :key="docente.id_docente"
-                        v-on:click="modificarDocente(docente)">
-                        <td>{{ docente.codigo }}</td>
-                        <td>{{ docente.nombre }}</td>
-                        <td>{{ docente.direccion }}</td>
-                        <td>{{ docente.dui }}</td>
-                        <td>{{ docente.telefono }}</td>
+                    <tr v-for="customer in misclientes" :key="customer.idCliente">
+                        <td>{{ customer.nombreC }}</td>
+                        <td>{{ customer.direccion }}</td>
+                        <td>{{ customer.telefono }}</td>
+                        <td>{{ customer.dui }}</td>
+
                         <td>
-                            <input v-on:click="eliminarDocente(docente.id_docente)" type="button"
-                                class="btn btn-outline-danger text-white" value="del">
+                            <input v-on:click="eliminarCliente(customer.idCliente)" type="button"
+                                class="btn btn-outline-danger text-white" value="Delete">
+                            <input v-on:click="modificarCliente(customer)" data-dismiss="modal" type="button"
+                                class="btn btn-outline-warning text-white" value="Update">
                         </td>
                     </tr>
                 </tbody>
+
             </table>
         </div>
     </div>
-    <dialog class="border-10 rounded bg-dark text-white border-primary text-center" id="dialogDocentes">
-        <p>Esta seguro de eliminar el registro de Docentes?</p>
+    <dialog class="border-10 rounded bg-dark text-white border-primary" id="dialogCliente">
+        <p>Esta seguro de eliminar el registro?</p>
 
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-sm">
-                    <input class="btn btn-primary" type="button" id="btnConfirmarDocentes" Value="Aceptar">
+                    <input class="btn btn-primary" type="button" id="btnConfirmarCliente" Value="Aceptar">
                 </div>
                 <div class="col-sm">
-                    <input class="btn btn-danger" type="button" id="btnCancelarDocentes" Value="Cancelar">
+                    <input class="btn btn-danger" type="button" id="btnCancelarCliente" Value="Cancelar">
                 </div>
             </div>
         </div>
     </dialog>
 </form>
-<script src="public/vistas/docentes/buscar-docentes.js"></script>
+<script src="public/vistas/clientes/buscar-clientes.js"></script>

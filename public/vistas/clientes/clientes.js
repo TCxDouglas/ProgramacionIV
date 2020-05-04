@@ -1,30 +1,30 @@
-var appdocente = new Vue({
-    el: '#frmDocentes',
+var appcliente = new Vue({
+    el: '#frm-clientes',
     data: {
-        docente: {
-            id_docente: 0,
+        cliente: {
+            idCliente: 0,
             accion: 'nuevo',
-            codigo: '',
-            nombre: '',
+            nombreC: '',
             direccion: '',
-            dui: '',
             telefono: '',
+            dui: '',
             msg: ''
         }
     },
     methods: {
-        guardarDocente: function () {
-            fetch(`private/modulos/docentes/procesos.php?proceso=recibirDatos&docente=${JSON.stringify(this.docente)}`).then(resp => resp.json()).then(resp => {
-                this.docente.msg = resp.msg;
-                this.docente.id_docente = 0;
-                this.docente.codigo = '';
-                this.docente.nombre = '';
-                this.docente.direccion = '';
-                this.docente.telefono = '';
-                this.docente.dui = '';
-                this.docente.accion = 'nuevo';
-                appBuscarDocentes.buscarDocente();
+        guardarCliente: function () {
+            fetch(`private/modulos/clientes/procesos.php?proceso=recibirDatos&cliente=${JSON.stringify(this.cliente)}`).then(resp => resp.json()).then(resp => {
+                this.cliente.msg = resp.msg;
+                this.limpiarCliente()
             });
+        },
+        limpiarCliente: function () {
+            this.cliente.idCliente = 0;
+            this.cliente.nombreC = '';
+            this.cliente.direccion = '';
+            this.cliente.telefono = '';
+            this.cliente.accion = 'nuevo';
+            appBuscarClientes.buscarCliente();
         }
     }
 });

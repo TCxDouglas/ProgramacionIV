@@ -30,7 +30,7 @@ class cliente{
             $this->respuesta['msg']='Por Favor Ingrese el DUI del cliente';
         
         }
-        if(empty($this->datos['nombre'])){
+        if(empty($this->datos['nombreC'])){
             $this->respuesta['msg']='Por Favor Ingrese el nombre del cliente';
 
         }
@@ -45,8 +45,8 @@ class cliente{
         if($this->respuesta['msg']==='correcto'){
             if($this->datos['accion']==="nuevo"){
                 $this->bd->consultas('
-                INSERT INTO clientes (nombre,direccion,telefono,dui) VALUES(
-                    "'. $this->datos['nombre'] .'",
+                INSERT INTO clientes (nombreC,direccion,telefono,dui) VALUES(
+                    "'. $this->datos['nombreC'] .'",
                     "'. $this->datos['direccion'] .'",
                     "'. $this->datos['telefono'] .'",
                     "'. $this->datos['dui'] .'"
@@ -56,7 +56,7 @@ class cliente{
             }else if($this->datos['accion']==='modificar'){
                 $this->bd->consultas('
                 UPDATE clientes SET 
-                nombre= "'. $this->datos['nombre'].'",
+                nombreC= "'. $this->datos['nombreC'].'",
                 direccion= "'. $this->datos['direccion'].'",
                 telefono= "'.$this->datos['telefono'].'",
                 dui= "'.$this->datos['dui'].'"
@@ -69,9 +69,9 @@ class cliente{
 
     public function buscarCliente($valor=''){
         $this->bd->consultas('
-        SELECT clientes.idCliente, clientes.nombre, clientes.direccion, clientes.telefono, clientes.dui
+        SELECT clientes.idCliente, clientes.nombreC, clientes.direccion, clientes.telefono, clientes.dui
         FROM clientes
-        WHERE clientes.nombre LIKE "%'.$valor.'%" OR clientes.direccion LIKE "%'.$valor.'%" OR clientes.dui LIKE "%'.$valor.'%"
+        WHERE clientes.nombreC LIKE "%'.$valor.'%" OR clientes.direccion LIKE "%'.$valor.'%" OR clientes.dui LIKE "%'.$valor.'%"
         ');
         return $this->respuesta=$this->bd->obtener_datos();
     }

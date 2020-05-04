@@ -1,39 +1,40 @@
-var appBuscarDocentes = new Vue({
-    el: '#frm-buscar-docentes',
+var appBuscarClientes = new Vue({
+    el: '#frm-buscar-clientes',
     data: {
-        misdocentes: [],
+        misclientes: [],
         valor: ''
     },
     methods: {
-        buscarDocente: function () {
-            fetch(`private/modulos/docentes/procesos.php?proceso=buscarDocente&docente=${this.valor}`).then(resp => resp.json()).then(resp => {
-                this.misdocentes = resp;
+        buscarCliente: function () {
+            fetch(`private/modulos/clientes/procesos.php?proceso=buscarCliente&cliente=${this.valor}`).then(resp => resp.json()).then(resp => {
+                this.misclientes = resp;
             });
         },
-        modificarDocente: function (docente) {
-            appdocente.docente = docente;
-            appdocente.docente.accion = 'modificar';
+        modificarCliente: function (cliente) {
+            appcliente.cliente = cliente;
+            appcliente.cliente.accion = 'modificar';
         },
-        eliminarDocente: function (id_docente) {
-            let dialog = document.getElementById("dialogDocentes");
+        eliminarCliente: function (idCliente) {
+            let dialog = document.getElementById("dialogCliente");
             dialog.close();
             dialog.showModal();
 
-
-            $(`#btnCancelarDocentes`).click(e=>{
+            $(`#btnCancelarCliente`).click(e => {
                 dialog.close();
-            })
+            });
 
-            $(`#btnConfirmarDocentes`).click(e=>{
-                fetch(`private/modulos/docentes/procesos.php?proceso=eliminarDocente&docente=${id_docente}`).then(resp => resp.json()).then(resp => {
-                    this.buscarDocente();
+            $(`#btnConfirmarCliente`).click(e => {
+                fetch(`private/modulos/clientes/procesos.php?proceso=eliminarCliente&cliente=${idCliente}`).then(resp => resp.json()).then(resp => {
+                    this.buscarCliente();
+                    appcliente.limpiarCliente();
                 });
                 dialog.close();
-            })
-            
+            });
+
         }
     },
+
     created: function () {
-        this.buscarDocente();
+        this.buscarCliente();
     }
 });
