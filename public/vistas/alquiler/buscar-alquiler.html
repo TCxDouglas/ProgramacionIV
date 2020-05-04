@@ -1,57 +1,62 @@
-<form method="POST" id="frm-buscar-alumnos">
+<form method="POST" id="frm-buscar-alquiler">
     <div class="card text-white bg-dark mb-3" style="max-width: 48rem;">
         <div class="car-header">
-            BUSQUEDA ALUMNOS
+            BUSQUEDA MATERIAS
 
-            <button type="button" id="btn-close-buscar-alumnos" class="close" aria-label="Close">
+            <button type="button" id="btn-close-buscar-alquiler" class="close" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
         <div class="card-body">
-            <table id="tbl-buscar-alumnos" class="table-striped table-dark table-bordered table-hover">
+            <table id="tbl-buscar-alquiler" class="table-striped table-dark table-bordered table-hover">
                 <thead>
                     <tr>
                         <th colspan="8">
-                            <input type="text" v-model="valor" v-on:keyup="buscarAlumno" placeholder="codigo o nombre" class="form-control">
+                            <input type="text" v-model="valor" v-on:keyup="buscarAlquiler" placeholder="cliente o pelicula"
+                                class="form-control">
                         </th>
                     </tr>
                     <tr>
-                        <th>CODIGO</th>
-                        <th>NOMBRE</th>
-                        <th>DIRECCION</th>
-                        <th>TELEFONO</th>
-                        <th> </th>
+                        <th>Cliente</th>
+                        <th>Pelicula</th>
+                        <th>Fecha prestamo</th>
+                        <th>Fecha devolucion</th>
+                        <th>Valor</th>
                     </tr>
                 </thead>
+
+
                 <tbody>
-                     <tr v-for="estudiante in misalumnos" :key="estudiante.idAlumno"
-                         v-on:click="modificarAlumno(estudiante)">
-                         <td>{{ estudiante.codigo }}</td>
-                         <td>{{ estudiante.nombre }}</td>
-                         <td>{{ estudiante.direccion }}</td>
-                         <td>{{ estudiante.telefono }}</td>
-                         <td>
-                             <input v-on:click="eliminarAlumno(estudiante.idAlumno)" type="button"
-                                 class="btn btn-outline-danger text-white" value="del">
-                         </td>
-                     </tr>
+                    <tr v-for="alquileres in misalquileres" :key="alquileres.idAlquiler">
+                        <td>{{ alquileres.nombreC }}</td>
+                        <td>{{ alquileres.nombre }}</td>
+                        <td>{{ alquileres.fechaPrestamo }}</td>
+                        <td>{{ alquileres.fechaDevolucion }}</td>
+                        <td>{{ alquileres.valor }}</td>
+
+                        <td>
+                            <input v-on:click="eliminarAlquiler(alquileres.idAlquiler)" type="button" class="btn btn-outline-danger text-white" value="Delete">
+                            <input v-on:click="modificarAlquiler(alquileres)" data-dismiss="modal" type="button" class="btn btn-outline-warning text-white" value="Update">
+                        </td>
+                    </tr>
                 </tbody>
+                
             </table>
         </div>
     </div>
-    <dialog class="border-10 rounded bg-dark text-white border-primary" id="dialogAlumno">
+    <dialog class="border-10 rounded bg-dark text-white border-primary" id="dialogAlquiler">
         <p>Esta seguro de eliminar el registro?</p>
 
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-sm">
-                    <input class="btn btn-primary" type="button" id="btnConfirmarAlumno" Value="Aceptar">
+                    <input class="btn btn-primary" type="button" id="btnConfirmarAlquiler" Value="Aceptar">
                 </div>
                 <div class="col-sm">
-                    <input class="btn btn-danger" type="button" id="btnCancelarAlumno" Value="Cancelar">
+                    <input class="btn btn-danger" type="button" id="btnCancelarAlquiler" Value="Cancelar">
                 </div>
             </div>
         </div>
     </dialog>
 </form>
-<script src="public/vistas/alumnos/buscar-alumnos.js"></script>
+<script src="public/vistas/alquiler/buscar-alquiler.js"></script>

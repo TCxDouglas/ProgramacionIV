@@ -26,17 +26,16 @@ class alquiler{
     }
 
     private function validar_datos(){
-        if(empty($this->datos['idCliente'])){
-            $this->respuesta['msg']='Por Favor Ingrese el idCliente del alquiler';
+        if(empty($this->datos['nombreC'])){
+            $this->respuesta['msg']='Por Favor Ingrese el cliente del alquiler';
         
         }
-        if(empty($this->datos['idPelicula'])){
-            $this->respuesta['msg']='Por Favor Ingrese el idPelicula del alquiler';
+        if(empty($this->datos['nombre'])){
+            $this->respuesta['msg']='Por Favor Ingrese la Pelicula del alquiler';
 
         }
         if(empty($this->datos['fechaPrestamo'])){
             $this->respuesta['msg']='Por Favor Ingrese la Fecha de Prestamo del alquiler';
-
         }
         $this->almacenar_alquiler();
     }
@@ -46,19 +45,20 @@ class alquiler{
             if($this->datos['accion']==="nuevo"){
                 $this->bd->consultas('
                 INSERT INTO alquiler (idCliente, idPelicula, fechaPrestamo, fechaDevolucion, valor) VALUES(
-                    "'. $this->datos['idCliente'] .'",
-                    "'. $this->datos['idPelicula'] .'",
+                    "'. $this->datos['nombreC'] .'",
+                    "'. $this->datos['nombre'] .'",
                     "'. $this->datos['fechaPrestamo'] .'",
                     "'. $this->datos['fechaDevolucion'] .'",
                     "'. $this->datos['valor'] .'"
                     )
                 ');
                 $this->respuesta['msg']='Registro Insertado con Exito';
-            }else if($this->datos['accion']==='modificar'){
+            }
+            else if($this->datos['accion']==='modificar'){
                 $this->bd->consultas('
                 UPDATE alquiler SET 
-                idCliente= "'. $this->datos['idCliente'].'",
-                idPelicula= "'. $this->datos['idPelicula'].'",
+                idCliente= "'. $this->datos['nombreC'].'",
+                idPelicula= "'. $this->datos['nombre'].'",
                 fechaPrestamo= "'.$this->datos['fechaPrestamo'].'",
                 fechaDevolucion= "'.$this->datos['fechaDevolucion'].'",
                 valor= "'.$this->datos['valor'].'"
@@ -71,21 +71,49 @@ class alquiler{
 
     public function buscarAlquiler($valor=''){
         $this->bd->consultas('
-            SELECT cl.nombre, pe.nombre, al.fechaPrestamo, al.fechaDevolucion, al.valor
-            FROM alquiler al, clientes cl, peliculas pe
-            WHERE al.idCliente=cl.idCliente AND al.idPelicula=pe.idPelicula AND
-            cl.nombre LIKE "%'.$valor.'%" OR pe.nombre LIKE "%'.$valor.'%"
+        SELECT alquiler.idAlquiler, clientes.nombreC, peliculas.nombre, alquiler.fechaPrestamo, alquiler.fechaDevolucion, alquiler.valor 
+        FROM alquiler INNER JOIN peliculas ON(peliculas.idPelicula=alquiler.idPelicula) 
+        INNER JOIN clientes ON(clientes.idCliente=alquiler.idCliente) 
+        WHERE clientes.nombreC LIKE "%'.$valor .'%" OR peliculas.nombre LIKE "%'.$valor .'%"
         ');
         return $this->respuesta=$this->bd->obtener_datos();
     }
 
     public function eliminarAlquiler($idAlquiler=''){
-        $this->bd->consultas('
-        DELETE alquiler 
+        $this->bd->consultas(' DELETE alquiler
         FROM alquiler
         WHERE alquiler.idAlquiler="'.$idAlquiler.'"
         ');
         $this->respuesta['msg']="Registro Eliminado con Exito";
+    }
+
+
+    public function traer_datos_clientes(){
+        $this->bd->consultas('SELECT * FROM clientes');
+        $Clientes = $this->bd->obtener_datos();
+        $imprimirClientes = [];
+        $imprimirClientesIDs = [];
+        for ($i=0; $i < count($Clientes); $i++) { 
+            $imprimirClientes[] = $Clientes[$i]['nombreC'];
+            $imprimirClientesIDs[] = $Clientes[$i]['idCliente'];
+        }
+        // echo json_encode($imprimirAgregarServicios);
+
+        return $this->respuesta = ['Clientes'=>$imprimirClientes, 'ClientesID'=>$imprimirClientesIDs ];//array de php en v7+
+    }
+
+    public function traer_datos_peliculas(){
+        $this->bd->consultas('SELECT * FROM peliculas');
+        $Peliculas = $this->bd->obtener_datos();
+        $imprimirPeliculas = [];
+        $imprimirPeliculasIDs = [];
+        for ($i=0; $i < count($Peliculas); $i++) { 
+            $imprimirPeliculas[] = $Peliculas[$i]['nombre'];
+            $imprimirPeliculasIDs[] = $Peliculas[$i]['idPelicula'];
+        }
+        // echo json_encode($imprimirAgregarServicios);
+
+        return $this->respuesta = ['Peliculas'=>$imprimirPeliculas, 'PeliculasID'=>$imprimirPeliculasIDs ];//array de php en v7+
     }
 }
 
