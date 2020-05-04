@@ -1,27 +1,27 @@
-var appmateria = new Vue({
-    el: '#frm-materia',
+var apppelicula = new Vue({
+    el: '#frmPelicula',
     data: {
-        materia: {
-            idmateria: 0,
+        pelicula: {
+            id_pelicula: 0,
             accion: 'nuevo',
-            codigo: '',
             nombre: '',
-            carrera: '',
-            ciclo: '',
+            sinopsis: '',
+            genero: '',
+            duracion: '',
             msg: ''
         }
     },
     methods: {
-        guardarMateria: function () {
-            fetch(`private/modulos/materias/procesos.php?proceso=recibirDatos&materia=${JSON.stringify(this.materia)}`).then(resp => resp.json()).then(resp => {
-                this.materia.msg = resp.msg;
-                this.materia.idmateria = 0;
-                this.materia.codigo = '';
-                this.materia.nombre = '';
-                this.materia.carrera = '';
-                this.materia.ciclo = '';
-                this.materia.accion = 'nuevo';
-                appBuscarMateria.buscarMateria();
+        guardarPelicula: function () {
+            fetch(`private/modulos/peliculas/procesos.php?proceso=recibirDatos&peliculas=${JSON.stringify(this.pelicula)}`).then(resp => resp.json()).then(resp => {
+                this.pelicula.msg = resp.msg;
+                this.pelicula.id_pelicula = 0;
+                this.pelicula.nombre = '';
+                this.pelicula.sinopsis = '';
+                this.pelicula.genero = '';
+                this.pelicula.duracion = '';
+                this.pelicula.accion = 'nuevo';
+                appBuscarPelicula.buscarPelicula();
             });
         }
     }
