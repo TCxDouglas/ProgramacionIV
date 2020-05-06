@@ -1,3 +1,7 @@
-.modulos{
+.modulos {
     position: absolute;
+}
+
+.v-select {
+    background: white !important;
 }

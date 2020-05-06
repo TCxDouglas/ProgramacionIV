@@ -15,21 +15,16 @@ var appBuscarAlumnos = new Vue({
                     appalumno.alumno.accion = 'modificar';
                 },
                 eliminarAlumno: function (idAlumno) {
-                    let dialog = document.getElementById("dialogAlumno");
-                    dialog.close();
-                    dialog.showModal();
-
-                    $(`#btnCancelarAlumno`).click(e => {
-                        dialog.close();
-                    });
-
-                    $(`#btnConfirmarAlumno`).click(e => {
-                         fetch(`private/modulos/alumnos/procesos.php?proceso=eliminarAlumno&alumno=${idAlumno}`).then(resp => resp.json()).then(resp => {
-                             this.buscarAlumno();
-                             appalumno.limpiarAlumno();
-                         });
-                        dialog.close();
-                    });
+                    alertify.confirm("Mantenimiento Alumnos", "Esta seguro de eliminar",
+                        () => {
+                            fetch(`private/modulos/alumnos/procesos.php?proceso=eliminarAlumno&alumno=${idAlumno}`).then(resp => resp.json()).then(resp => {
+                                this.buscarAlumno();
+                            });
+                            alertify.success('Registro Eliminado correctamente.');
+                        },
+                        () => {
+                            alertify.error('Eliminacion cancelada por el usuario.');
+                        });
                    
                 }
             },

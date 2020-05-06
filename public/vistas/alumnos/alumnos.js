@@ -15,6 +15,13 @@ var appalumno = new Vue({
         guardarAlumno: function () {
             fetch(`private/modulos/alumnos/procesos.php?proceso=recibirDatos&alumno=${JSON.stringify(this.alumno)}`).then(resp => resp.json()).then(resp => {
                 this.alumno.msg = resp.msg;
+                if (resp.msg.indexOf("correctamente") >= 0) {
+                    alertify.success(resp.msg);
+                } else if (resp.msg.indexOf("Error") >= 0) {
+                    alertify.error(resp.msg);
+                } else {
+                    alertify.warning(resp.msg);
+                }
                 this.limpiarAlumno()
             });
         },

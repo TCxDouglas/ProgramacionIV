@@ -26,15 +26,15 @@ class alumno{
     }
 
     private function validar_datos(){
-        if(empty($this->datos['codigo'])){
+        if(empty(trim($this->datos['codigo']))){
             $this->respuesta['msg']='Por Favor Ingrese el codigo del estudiante';
         
         }
-        if(empty($this->datos['nombre'])){
+        if(empty(trim($this->datos['nombre']))){
             $this->respuesta['msg']='Por Favor Ingrese el nombre del estudiante';
 
         }
-        if(empty($this->datos['direccion'])){
+        if(empty(trim($this->datos['direccion']))){
             $this->respuesta['msg']='Por Favor Ingrese la direccion del estudiante';
 
         }
@@ -63,6 +63,8 @@ class alumno{
                 WHERE idAlumno="'. $this->datos['idAlumno'].'"
                 ');
                 $this->respuesta['msg']='Registro Actualizado con Exito';
+            }else{
+                $this->respuesta['msg'] = 'Error no se envio la accion a realizar';
             }
         }
     }
